@@ -18,6 +18,7 @@ namespace Project.Pages.Resumes
         public void OnGet()
         {
             resume = _DbRepo.GetResumeById(Id);
+            Console.WriteLine("In View Resume Check!");
         }
     }
 }
