@@ -1,0 +1,92 @@
+﻿@page
+@model Project.Pages.Resumes.EditModel
+@{
+    string[] genders = new[] { "Male", "Female" };
+    List<SelectListItem> nationalities = new List<SelectListItem>
+    {
+        new SelectListItem{Value="Lebanese", Text="Lebanese"},
+        new SelectListItem{Value="Syrian", Text="Syrian"},
+        new SelectListItem{Value="Palestinian", Text="Palestinian"}
+    };
+    List<Skill> skills = new List<Skill>
+    {
+        new Skill("Java",false),
+        new Skill("Python",false),
+        new Skill("PHP",false),
+        new Skill(".Net",false)
+    };
+}
+<form asp-page="CreateModel" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="input.FirstName"></label>
+        <input asp-for="input.FirstName" class="form-control" />
+        <span asp-validation-for="input.FirstName" class="text-danger"></span>
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="input.LastName"></label>
+        <input asp-for="input.LastName" class="form-control" />
+        <span asp-validation-for="input.LastName" class="text-danger"></span>
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="input.Email"></label>
+        <input asp-for="input.Email" class="form-control" />
+        <span asp-validation-for="input.Email" class="text-danger"></span>
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="input.EmailConfirmation"></label>
+        <input asp-for="input.EmailConfirmation" class="form-control" />
+        <span asp-validation-for="input.EmailConfirmation" class="text-danger"></span>
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="input.PhoneNumber"></label>
+        <input asp-for="input.PhoneNumber" class="form-control" />
+        <span asp-validation-for="input.PhoneNumber" class="text-danger"></span>
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="input.BirthDate"></label>
+        <input asp-for="input.BirthDate" class="form-control" />
+        <span asp-validation-for="input.BirthDate" class="text-danger" />
+    </div><br />
+
+    <div>
+        @foreach (var g in genders)
+        {
+            <input type="radio" asp-for="input.Gender" value="@g" />
+            @g
+
+            <br />
+        }
+    </div><br />
+    <div class="form-group">
+        <label asp-for="input.Nationality"></label>
+        <select asp-for="input.Nationality" asp-items="nationalities" class="btn btn-secondary dropdown-toggle"></select>
+        <span asp-validation-for="input.Nationality" class="text-danger"></span>
+    </div><br />
+    <p>Select your skills</p>
+    <br />
+    <div class="form-group">
+        @for (int i = 0; i < skills.Count; i++)
+        {
+            <label asp-for="input.Skills[i]" style="margin-right=20px;">@skills[i].name </label>
+            <input asp-for="input.Skills[i]">
+        }
+    </div><br />
+
+    <div class="form-group">
+        <label asp-for="input.ProfileImage" class="control-label"></label><br />
+        <input asp-for="input.ProfileImage" class="btn btn-secondary custom-file-input">
+        <span asp-validation-for="input.ProfileImage" class="text-danger" />
+    </div><br />
+
+    <div>
+        <button type="submit" class="btn btn-secondary">Submit</button>
+    </div>
+
+    <div asp-validation-summary="All"></div>
+
+</form>
